@@ -1,2 +1,3 @@
 # pullup-client
-HIHI`
+npm install && npm start
+
