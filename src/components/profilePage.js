@@ -29,7 +29,6 @@ class ProfilePage extends Component {
 
     render() {
         const { user } = this.props;
-        console.log(user);
         if (!user.first) {
             return <div>Loading ...</div>
         }
@@ -47,4 +46,3 @@ function mapStateToProps({ user }) {
 }
 
 export default connect(mapStateToProps, { fetchUser })(ProfilePage);
-

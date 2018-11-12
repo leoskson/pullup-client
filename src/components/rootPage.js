@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import GoogleApiWrapper from './googleMap';
+
 import Navbar from './navbar';
+import GoogleApiWrapper from './googleMap';
+import ParkinglotList from './parkinglotList';
+
 
 class RootPage extends Component {
     render() {
@@ -8,6 +11,7 @@ class RootPage extends Component {
             <div>
                 <Navbar />
                 <GoogleApiWrapper />
+                <ParkinglotList />
             </div>
         );
     }
