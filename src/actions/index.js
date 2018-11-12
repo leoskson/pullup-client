@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 export const FETCH_USER = 'fetchUser';
-export const POST_USER = 'postUser';
 export const FETCH_PARKINGLOTS = 'getParkinglots';
+export const FETCH_LOCATION = 'fetchLocation';
+export const POST_USER = 'postUser';
 
 const ROOT_URL = 'http://ec2-18-220-74-127.us-east-2.compute.amazonaws.com:3000';
 
@@ -26,12 +27,36 @@ export function postUser(values, callback) {
 }
 
 export function fetchParkinglots(lat, lng) {
-    console.log(lat + ' ' + lng);
+    // console.log(lat + ' ' + lng);
     // {{aws}}/parking?zip=30309&latitude=33.780060&longitude=-84.388110
     const request = axios.get(`${ROOT_URL}/parking?zip=30309&latitude=33.780060&longitude=-84.388110`);
 
     return {
         type: FETCH_PARKINGLOTS,
         payload: request
+    };
+}
+
+function showPosition(position) {
+    return position;
+}
+
+function getLocation() {
+    return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(pos => {
+                showPosition(pos);
+                resolve(pos);
+            });
+        } else {
+            reject("Geolocation is not supported by this browser.");
+        }
+    })
+}
+
+export function fetchLocation() {
+    return {
+        type: FETCH_LOCATION,
+        payload: getLocation()
     };
 }

@@ -7,7 +7,6 @@ import { fetchParkinglots } from '../actions';
 
 class ParkinglotList extends Component {
     componentDidMount() {
-        console.log(this.props);
         this.props.fetchParkinglots(1,2);
     }
 
@@ -18,6 +17,7 @@ class ParkinglotList extends Component {
     }
 
     render() {
+        console.log(this.props);
         const { parkinglots } = this.props;
         return (
             <ul>
