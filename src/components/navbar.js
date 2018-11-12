@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
-    click(event) {
-        event.preventDefault();
-    }
-
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="navbar-nav">
-            <a className="nav-item nav-link active" href="" onClick={this.click}>About</a>
-            <a className="nav-item nav-link active" href="" onClick={this.click}>Profile</a>
-            <a className="nav-item nav-link active" href="" onClick={this.click}>Reservation</a>
+                <Link className='nav-item nav-link active' to='/about'>About</Link>
+                <Link className='nav-item nav-link active' to='/user/sample'>Profile</Link>
+                <Link className='nav-item nav-link active' to='/'>Reservation</Link>
             </div>
             </nav>
         );
