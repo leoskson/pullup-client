@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { InfoWindow, GoogleApiWrapper } from 'google-maps-react';
+import { InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 const apiKey = 'AIzaSyDq0qA5f0DGeaZ5HBzWo1t5J2HuV_i4OiQ';
 const GOOGLE_STYLE = {
@@ -55,9 +55,8 @@ export class Map extends Component {
     }
 
     renderChildren() {
-        const {children} = this.props;
+        const { children } = this.props;
         if (!children) return;
-
         return React.Children.map(children, c => {
             return React.cloneElement(c, {
                 map: this.map,
@@ -77,37 +76,22 @@ export class Map extends Component {
     }
 }
 
-export class Marker extends Component {
-
-    componentDidMount() {
-        console.log(this.props);
-        this.renderMarker();
-    }
-
-    componentDidUpdate(prevProps) {
-        console.log(this.props);
-        this.renderMarker();
-    }
-
-    renderMarker() {
-        const { map, mapCenter } = this.props;
-        const { latitude, longitude } = mapCenter;
-        const position = new google.maps.LatLng(latitude, longitude);
-        const pref = { map, position };
-        this.marker = new google.maps.Marker(pref);
-    }
-
-    render() {
-        return null;
-    }
-}
-
 export class MapContainer extends Component {
+    markerParking() {
+        return _.map(this.props.parkinglots, parkinglot => {
+            const pos = { lat: parkinglot.latitude, lng: parkinglot.longitude }
+            return <Marker key={parkinglot.PUUID} position={pos} />
+        });
+    }
+
     render() {
+        const position = {lat: this.props.location.latitude, lng: this.props.location.longitude};
         return (
             <div>
                 <Map google={this.props.google} location={this.props.location} >
-                    <Marker/>
+                    <Marker />
+                    <Marker position={position} />
+                    {this.markerParking()}
                 </Map>
             </div>
         );

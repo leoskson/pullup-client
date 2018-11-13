@@ -24,7 +24,7 @@ class RootPage extends Component {
         return (
             <div>
                 <Navbar />
-                <GoogleApiWrapper location={this.props.location} />
+                <GoogleApiWrapper location={this.props.location} parkinglots={this.props.parkinglots} />
                 <ParkinglotList location={this.props.location} parkinglots={this.props.parkinglots}/>
                 <ParkinglotDetail parkinglot={parkinglot} />
             </div>
