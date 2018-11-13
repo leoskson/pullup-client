@@ -7,7 +7,6 @@ import ParkinglotList from './parkinglotList';
 import ParkinglotDetail from './parkinglotDetail';
 import { fetchLocation, fetchParkinglots } from '../actions';
 
-
 class RootPage extends Component {
     componentDidMount() {
         this.props.fetchLocation();

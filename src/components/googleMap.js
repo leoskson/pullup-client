@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { InfoWindow, GoogleApiWrapper } from 'google-maps-react'
+import { InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 
 const apiKey = 'AIzaSyDq0qA5f0DGeaZ5HBzWo1t5J2HuV_i4OiQ';
 const GOOGLE_STYLE = {
@@ -10,6 +10,7 @@ const GOOGLE_STYLE = {
 };
 
 export class Map extends Component {
+
     componentDidMount() {
         this.loadMap();
     }
@@ -78,23 +79,21 @@ export class Map extends Component {
 
 export class Marker extends Component {
 
+    componentDidMount() {
+        console.log(this.props);
+        this.renderMarker();
+    }
+
     componentDidUpdate(prevProps) {
-        console.log('marker update');
+        console.log(this.props);
         this.renderMarker();
     }
 
     renderMarker() {
-        console.log('marker render');
-        let {
-            map, google, position, mapCenter, location
-        } = this.props;
-        if (!location) return;
-        position = new google.maps.LatLng(location.latitude, location.longitude);
-
-        const pref = {
-            map: map,
-            position: position
-        };
+        const { map, mapCenter } = this.props;
+        const { latitude, longitude } = mapCenter;
+        const position = new google.maps.LatLng(latitude, longitude);
+        const pref = { map, position };
         this.marker = new google.maps.Marker(pref);
     }
 
@@ -108,8 +107,7 @@ export class MapContainer extends Component {
         return (
             <div>
                 <Map google={this.props.google} location={this.props.location} >
-                    <Marker />
-                    <Marker location={this.props.location}/>
+                    <Marker/>
                 </Map>
             </div>
         );
