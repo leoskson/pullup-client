@@ -27,10 +27,8 @@ export function postUser(values, callback) {
 }
 
 export function fetchParkinglots(lat, lng) {
-    // console.log(lat + ' ' + lng);
-    // {{aws}}/parking?zip=30309&latitude=33.780060&longitude=-84.388110
-    const request = axios.get(`${ROOT_URL}/parking?zip=30309&latitude=33.780060&longitude=-84.388110`);
-
+    const request = axios.get(`${ROOT_URL}/parking?zip=30309&latitude=${lat}&longitude=${lng}`);
+    
     return {
         type: FETCH_PARKINGLOTS,
         payload: request

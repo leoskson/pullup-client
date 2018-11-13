@@ -6,10 +6,7 @@ import Parkinglot from './parkinglot';
 import { fetchParkinglots } from '../actions';
 
 class ParkinglotList extends Component {
-    componentDidMount() {
-        this.props.fetchParkinglots(1,2);
-    }
-
+    
     renderParkinglots() {
         return _.map(this.props.parkinglots, parkinglot => {
             return <Parkinglot key={parkinglot.PUUID} parkinglot={parkinglot} />
@@ -17,7 +14,6 @@ class ParkinglotList extends Component {
     }
 
     render() {
-        console.log(this.props);
         const { parkinglots } = this.props;
         return (
             <ul>

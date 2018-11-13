@@ -10,7 +10,7 @@ export class Map extends React.Component {
     constructor(props) {
         super(props);
     
-        const {lat, lng} = this.props.initialCenter;
+        const { lat, lng } = this.props.initialCenter;
         this.state = { currentLocation: { lat, lng } }
     }
 
