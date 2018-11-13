@@ -5,7 +5,7 @@ const DEFAULT_LOCATION = {
     longitude: -122.0839
 }
 
-export default function(state = DEFAULT_LOCATION, action) {
+export default function(state = { latitude: 0, longitude: 0}, action) {
     switch(action.type) {
     case FETCH_LOCATION:
         return action.payload.coords;
