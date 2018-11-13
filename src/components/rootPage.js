@@ -14,7 +14,7 @@ class RootPage extends Component {
 
     componentDidUpdate(prevProps) {
         const { latitude, longitude } = this.props.location;
-        if (prevProps.location.latitude != latitude || prevProps.location.longitude != longitude) {
+        if (this.props.location !== prevProps.location) {
             this.props.fetchParkinglots(latitude, longitude);
         }
     }
@@ -23,7 +23,7 @@ class RootPage extends Component {
         return (
             <div>
                 <Navbar />
-                <GoogleApiWrapper />
+                <GoogleApiWrapper location={this.props.location} />
                 <ParkinglotList location={this.props.location} parkinglots={this.props.parkinglots}/>
             </div>
         );
