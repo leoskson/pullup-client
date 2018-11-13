@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 export const FETCH_USER = 'fetchUser';
-export const FETCH_PARKINGLOTS = 'getParkinglots';
+export const FETCH_PARKINGLOTS = 'fetchParkinglots';
 export const FETCH_LOCATION = 'fetchLocation';
 export const POST_USER = 'postUser';
+export const SELECT_PARKINGLOT = 'selectParkinglot';
 
 const ROOT_URL = 'http://ec2-18-220-74-127.us-east-2.compute.amazonaws.com:3000';
 
@@ -26,8 +27,15 @@ export function postUser(values, callback) {
     };
 }
 
+export function selectParkinglot(id) {
+    return {
+        type: SELECT_PARKINGLOT,
+        payload: id
+    };
+}
+
 export function fetchParkinglots(lat, lng) {
-    const request = axios.get(`${ROOT_URL}/parking?zip=30309&latitude=${lat}&longitude=${lng}`);
+    const request = axios.get(`${ROOT_URL}/parking?latitude=${lat}&longitude=${lng}`);
     
     return {
         type: FETCH_PARKINGLOTS,

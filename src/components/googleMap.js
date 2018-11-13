@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react'
+import { InfoWindow, GoogleApiWrapper } from 'google-maps-react'
 
 const apiKey = 'AIzaSyDq0qA5f0DGeaZ5HBzWo1t5J2HuV_i4OiQ';
 const GOOGLE_STYLE = {
@@ -9,14 +9,12 @@ const GOOGLE_STYLE = {
     height: '50vh'
 };
 
-export class Map extends React.Component {
+export class Map extends Component {
     componentDidMount() {
-        console.log('mount');
         this.loadMap();
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('update');
         if (prevProps.google !== this.props.google) {
             this.loadMap();
         }
@@ -26,7 +24,6 @@ export class Map extends React.Component {
     }
 
     recenterMap() {
-        console.log('recenter');
         const map = this.map;
         const { latitude, longitude } = this.props.location;
     
@@ -41,7 +38,6 @@ export class Map extends React.Component {
 
     loadMap() {
         if (this.props && this.props.google) {
-            console.log('load map');
             const { google } = this.props;
             const maps = google.maps;
             const mapRef = this.refs.map;
@@ -57,12 +53,53 @@ export class Map extends React.Component {
         }
     }
 
+    renderChildren() {
+        const {children} = this.props;
+        if (!children) return;
+
+        return React.Children.map(children, c => {
+            return React.cloneElement(c, {
+                map: this.map,
+                google: this.props.google,
+                mapCenter: this.props.location
+            });
+        })
+    }
+
     render() {
         return (
             <div ref='map' style={GOOGLE_STYLE}>
                 Loading map...
+                {this.renderChildren()}
             </div>
         );
+    }
+}
+
+export class Marker extends Component {
+
+    componentDidUpdate(prevProps) {
+        console.log('marker update');
+        this.renderMarker();
+    }
+
+    renderMarker() {
+        console.log('marker render');
+        let {
+            map, google, position, mapCenter, location
+        } = this.props;
+        if (!location) return;
+        position = new google.maps.LatLng(location.latitude, location.longitude);
+
+        const pref = {
+            map: map,
+            position: position
+        };
+        this.marker = new google.maps.Marker(pref);
+    }
+
+    render() {
+        return null;
     }
 }
 
@@ -70,7 +107,10 @@ export class MapContainer extends Component {
     render() {
         return (
             <div>
-                <Map google={this.props.google} location={this.props.location}/>
+                <Map google={this.props.google} location={this.props.location} >
+                    <Marker />
+                    <Marker location={this.props.location}/>
+                </Map>
             </div>
         );
     }
