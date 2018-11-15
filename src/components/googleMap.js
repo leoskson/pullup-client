@@ -89,7 +89,6 @@ export class MapContainer extends Component {
         return (
             <div>
                 <Map google={this.props.google} location={this.props.location} >
-                    <Marker />
                     <Marker position={position} />
                     {this.markerParking()}
                 </Map>

@@ -3,10 +3,22 @@ import axios from 'axios';
 export const FETCH_USER = 'fetchUser';
 export const FETCH_PARKINGLOTS = 'fetchParkinglots';
 export const FETCH_LOCATION = 'fetchLocation';
+export const FETCH_SPOTS = 'fetchSpots';
+export const FETCH_RESERVATIONS = 'fetchReservations';
 export const POST_USER = 'postUser';
 export const SELECT_PARKINGLOT = 'selectParkinglot';
 
-const ROOT_URL = 'http://ec2-18-220-74-127.us-east-2.compute.amazonaws.com:3000';
+// const ROOT_URL = 'http://ec2-18-220-74-127.us-east-2.compute.amazonaws.com:3000';
+const ROOT_URL = 'http://localhost:3000';
+
+export function fetchReservations(id, date) {
+    const request = axios.get(`${ROOT_URL}/reservation/timeslots?SUUID=${id}&date=${date}`);
+
+    return {
+        type: FETCH_RESERVATIONS,
+        payload: request
+    };
+}
 
 export function fetchUser(id) {
     const request = axios.get(`${ROOT_URL}/user/${id}`);
@@ -41,6 +53,15 @@ export function fetchParkinglots(lat, lng) {
         type: FETCH_PARKINGLOTS,
         payload: request
     };
+}
+
+export function fetchSpots(spots) {
+    const request = axios.post(`${ROOT_URL}/spot`, { spots });
+
+    return {
+        type: FETCH_SPOTS,
+        payload: request
+    }
 }
 
 function showPosition(position) {
