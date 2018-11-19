@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
@@ -15,7 +16,7 @@ export class Map extends Component {
         this.loadMap();
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (prevProps.google !== this.props.google) {
             this.loadMap();
         }
@@ -106,4 +107,8 @@ Map.defaultProps = {
     zoom: 13
 }
 
-export default GoogleApiWrapper({ apiKey })(MapContainer);
+function mapStateToProps({ location, parkinglots }) {
+    return { location, parkinglots };
+}
+
+export default connect(mapStateToProps, {})(GoogleApiWrapper({ apiKey })(MapContainer));

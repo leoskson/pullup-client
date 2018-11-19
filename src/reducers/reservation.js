@@ -5,9 +5,7 @@ import { FETCH_RESERVATIONS } from '../actions';
 export default function(state = {}, action) {
     switch(action.type) {
     case FETCH_RESERVATIONS:
-        console.log(action.payload);
-        return action.payload;
-        // return _.mapKeys(action.payload.data, 'SUUID');
+        return _.mapKeys(action.payload.data, 'id');
     default:
         return state;s
     }

@@ -23,7 +23,7 @@ class ParkinglotDetail extends Component {
     }
 
     render() {
-        const { parkinglot } = this.props;
+        const parkinglot = this.props.parkinglots[this.props.activeParkinglot];
         if (!parkinglot) {
             return <div>Select parkinglot plz</div>
         }
@@ -40,8 +40,8 @@ class ParkinglotDetail extends Component {
     }
 }
 
-function mapStateToProps({ reservations }) {
-    return { reservations };
+function mapStateToProps({ reservations, activeParkinglot, spots, parkinglots }) {
+    return { reservations, activeParkinglot, spots, parkinglots };
 }
 
 export default connect(mapStateToProps, { fetchReservations })(ParkinglotDetail);

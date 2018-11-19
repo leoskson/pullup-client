@@ -5,13 +5,14 @@ import Navbar from './navbar';
 import GoogleApiWrapper from './googleMap';
 import ParkinglotList from './parkinglotList';
 import ParkinglotDetail from './parkinglotDetail';
+import SpotSchedule from './spotSchedule';
 import { fetchLocation, fetchParkinglots, fetchSpots } from '../actions';
 
 class RootPage extends Component {
     componentDidMount() {
         const { latitude, longitude } = this.props.location;
-        this.props.fetchParkinglots(latitude, longitude);
         this.props.fetchLocation();
+        this.props.fetchParkinglots(latitude, longitude);
     }
 
     componentDidUpdate(prevProps) {        
@@ -25,20 +26,20 @@ class RootPage extends Component {
     }
 
     render() {
-        const parkinglot = this.props.parkinglots[this.props.activeParkinglot];
         return (
             <div>
                 <Navbar />
-                <GoogleApiWrapper location={this.props.location} parkinglots={this.props.parkinglots} />
-                <ParkinglotList location={this.props.location} parkinglots={this.props.parkinglots}/>
-                <ParkinglotDetail parkinglot={parkinglot} spots={this.props.spots} />
+                <GoogleApiWrapper />
+                <ParkinglotList />
+                <ParkinglotDetail />
+                <SpotSchedule />
             </div>
         );
     }
 }
 
-function mapStateToProps({ location, parkinglots, activeParkinglot, spots }) {
-    return { location, parkinglots, activeParkinglot, spots };
+function mapStateToProps({ location, parkinglots, activeParkinglot, spots, reservations }) {
+    return { location, parkinglots, activeParkinglot, spots, reservations };
 }
 
 export default connect(mapStateToProps, { fetchLocation, fetchParkinglots, fetchSpots })(RootPage);
