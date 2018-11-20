@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
 import userReducer from './user';
 import parkinglotReducer from './parkinglot';
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   activeParkinglot: activeParkinglotReducer,
   location: locationReducer,
   spots: spotReducer,
-  reservations: reservationReducer
+  reservations: reservationReducer,
+  form: formReducer
 });
 
 export default rootReducer;
