@@ -18,11 +18,52 @@ class SpotSchedule extends Component {
         });
     }
 
+    renderTable() {
+        return _.map(this.props.reservations, reservation => {
+            return (
+                <div key={reservation.id} className='myReservation'>{this.getTime(reservation.id)}</div>
+            );
+        })
+    }
+
+    getTime(id) {
+        const num = Number(id)*30;
+        const hour = Math.floor(num/60);
+        const min = num%60;
+        const hourString = hour < 10 ? `0${hour}` : `${hour}`;
+        const minString = min == 0 ? `00` : `${min}`;
+        return `${hourString}:${minString}`;
+    }
+
+    renderAvail() {
+        return _.map(this.props.reservations, reservation => {
+            return (
+                <div key={reservation.id} className='myReservation'>{String(reservation.reserved)}</div>
+            );
+        })
+    }
+
     render() {
+        if (!this.props.reservations[0]) {
+            return <div></div>
+        }
         return (
-            <ul className='myReservationList'>
-                {this.renderSchedule()}
-            </ul>
+            <table className='table' id='myReservationList'>
+                <tbody>
+                    <tr>
+                        <th>Time</th>
+                        <th>Reserved</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            {this.renderTable()}
+                        </td>
+                        <td>
+                            {this.renderAvail()}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         );  
     }
 }

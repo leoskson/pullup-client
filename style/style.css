@@ -1,14 +1,18 @@
 #mapBox div:first-child {
     position: relative !important;
+    margin-top: 2%;
 }
-
 /* parking list */
 .myParkingList {
     /* background-color:red */
+    margin-top: 5%;
 }
 /* parkinglot detail */
 .myParkingDetail {
     /* background-color:red */
+    margin-right: 15%;
+    width: 30%;
+    float: left;
 }
 /* parkinglot */
 .myParking {
@@ -23,10 +27,30 @@
     /* background-color:red */
 }
 /* reservationlist */
-.myReservationList {
+#myReservationList {
     /* background-color:red */
+    max-width: 50%;
+    margin-left: 0%;
+    float: left;
 }
 /* reservation */
 .myReservation {
     /* background-color:red */
+}
+/* signup */
+.mySignup {
+    /* background-color: red */
+    margin-top: 5%;
+}
+/* login */
+.myLogin {
+    margin-top: 5%;
+}
+/* field */
+.myField {
+    /* background-color: red; */
+}
+/* navbar */
+.myNav {
+    margin-top:3%;
 }

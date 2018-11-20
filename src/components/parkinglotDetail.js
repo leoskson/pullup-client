@@ -15,7 +15,7 @@ class ParkinglotDetail extends Component {
             return (
                 <li className='mySpot' key={spot.SUUID} onClick={() => this.clickSpot(spot.SUUID)}>
                     <div>id: {spot.floor}-1 </div>
-                    <div>available: {String(spot.avail)} </div>
+                    <div>reserved: {String(spot.avail)} </div>
                     <div>floor: {spot.floor} </div>
                 </li>
             );

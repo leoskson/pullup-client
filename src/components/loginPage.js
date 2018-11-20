@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class LoginPage extends Component {
 
     renderField(field) {
-        const className = 'form-group';
+        const className = 'form-group myField';
         return (
             <div className={className}>
                 <label>{field.label}</label>
@@ -21,7 +21,7 @@ class LoginPage extends Component {
     render() {
         const { handleSubmit } = this.props;
         return (
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <form className='myLogin' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field
                     type='email'
                     label='User email'
