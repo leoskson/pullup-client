@@ -13,7 +13,7 @@ class ParkinglotDetail extends Component {
     renderSpots() {
         return _.map(this.props.spots, spot => {
             return (
-                <li key={spot.SUUID} onClick={() => this.clickSpot(spot.SUUID)}>
+                <li className='mySpot' key={spot.SUUID} onClick={() => this.clickSpot(spot.SUUID)}>
                     <div>id: {spot.floor}-1 </div>
                     <div>available: {String(spot.avail)} </div>
                     <div>floor: {spot.floor} </div>
@@ -28,11 +28,11 @@ class ParkinglotDetail extends Component {
             return <div>Select parkinglot plz</div>
         }
         return (
-            <div>
+            <div className='myParkingDetail'>
                 <div>{parkinglot.name}</div>
                 <div>hourly: {parkinglot.hourly}</div>
                 <div>spot : {parkinglot.spotCount}</div>
-                <ul>
+                <ul className='mySpotList'>
                     {this.renderSpots()}
                 </ul>
             </div>

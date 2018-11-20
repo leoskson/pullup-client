@@ -10,7 +10,7 @@ class Parkinglot extends Component {
 
     render() {
         return (
-            <li onClick={this.onChange.bind(this)}>{this.props.parkinglot.name}</li>
+            <li className='myParking' onClick={this.onChange.bind(this)}>{this.props.parkinglot.name}</li>
         );
     }
 }

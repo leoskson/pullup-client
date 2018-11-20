@@ -10,7 +10,7 @@ class SpotSchedule extends Component {
     renderSchedule() {
         return _.map(this.props.reservations, reservation => {
             return (
-                <li key={reservation.id} onClick={() => this.clickReservation(reservation.id)}>
+                <li className='myReservation' key={reservation.id} onClick={() => this.clickReservation(reservation.id)}>
                     <div>{reservation.id}</div>
                     <div>{String(reservation.reserved)}</div>
                 </li>
@@ -20,7 +20,7 @@ class SpotSchedule extends Component {
 
     render() {
         return (
-            <ul>
+            <ul className='myReservationList'>
                 {this.renderSchedule()}
             </ul>
         );  

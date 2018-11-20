@@ -16,7 +16,7 @@ class ParkinglotList extends Component {
     render() {
         const { parkinglots } = this.props;
         return (
-            <ul>
+            <ul className='myParkingList'>
                 {this.renderParkinglots()}
             </ul>
         );

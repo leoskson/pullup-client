@@ -1,3 +1,32 @@
 #mapBox div:first-child {
     position: relative !important;
 }
+
+/* parking list */
+.myParkingList {
+    /* background-color:red */
+}
+/* parkinglot detail */
+.myParkingDetail {
+    /* background-color:red */
+}
+/* parkinglot */
+.myParking {
+    /* background-color:red */
+}
+/* spotlist */
+.mySpotList {
+    /* background-color:red */
+}
+/* spot */
+.mySpot {
+    /* background-color:red */
+}
+/* reservationlist */
+.myReservationList {
+    /* background-color:red */
+}
+/* reservation */
+.myReservation {
+    /* background-color:red */
+}
