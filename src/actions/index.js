@@ -30,9 +30,8 @@ export function fetchUser(config) {
     };
 }
 
-export function postUser(values, callback) {
-    const request = axios.post(`${ROOT_URL}/user/`, values)
-        .then((res) => callback(res));
+export function postUser(values) {
+    const request = axios.post(`${ROOT_URL}/registration`, values);
 
     return {
         type: POST_USER,

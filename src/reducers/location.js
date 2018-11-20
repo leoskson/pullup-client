@@ -10,7 +10,7 @@ const NY_LOCATION = {
     longitude: -74.004750
 }
 
-export default function(state = NY_LOCATION, action) {
+export default function(state = ATLANTA_LOCATION, action) {
     switch(action.type) {
     case FETCH_LOCATION:
         return action.payload.coords;

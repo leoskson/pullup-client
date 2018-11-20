@@ -11,7 +11,9 @@ import { fetchLocation, fetchParkinglots, fetchSpots } from '../actions';
 class RootPage extends Component {
     componentDidMount() {
         const { latitude, longitude } = this.props.location;
+        const { config } = this.props;
         this.props.fetchLocation();
+        this.props.fetchParkinglots(latitude, longitude, config);
     }
 
     componentDidUpdate(prevProps) {

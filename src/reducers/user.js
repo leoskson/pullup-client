@@ -7,8 +7,9 @@ export default function(state = {}, action) {
             ...state,
             ...action.payload.data
         }
-    // case POST_USER:
-    //     console.log(action.payload);
+    case POST_USER:
+        console.log(action.payload);
+        return action.payload;
     // case POST_LOGIN:
     //     return action.payload.data;
     default:

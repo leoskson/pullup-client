@@ -18,10 +18,7 @@ class SignupPage extends Component {
     }
 
     onSubmit(values) {
-        this.props.postUser(values, (res) => {
-            console.log(res);
-            // this.props.history.push('/');
-        });
+        this.props.postUser(values);
     }
 
     render() {
@@ -31,7 +28,7 @@ class SignupPage extends Component {
                 <Field
                     type='email'
                     label='User email'
-                    name='UUID'
+                    name='email'
                     component={this.renderField} />
                 <Field
                     type='password'
