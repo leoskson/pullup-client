@@ -9,7 +9,7 @@ const NY_LOCATION = {
     latitude: 40.725910,
     longitude: -74.004750
 }
-//33.7749° N, 84.3964° W
+
 export default function(state = NY_LOCATION, action) {
     switch(action.type) {
     case FETCH_LOCATION:

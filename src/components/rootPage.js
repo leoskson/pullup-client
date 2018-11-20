@@ -12,10 +12,9 @@ class RootPage extends Component {
     componentDidMount() {
         const { latitude, longitude } = this.props.location;
         this.props.fetchLocation();
-        this.props.fetchParkinglots(latitude, longitude);
     }
 
-    componentDidUpdate(prevProps) {        
+    componentDidUpdate(prevProps) {
         const { latitude, longitude } = this.props.location;
         if (this.props.location !== prevProps.location) {
             this.props.fetchParkinglots(latitude, longitude);
