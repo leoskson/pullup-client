@@ -7,12 +7,13 @@ export const FETCH_SPOTS = 'fetchSpots';
 export const FETCH_RESERVATIONS = 'fetchReservations';
 export const POST_USER = 'postUser';
 export const SELECT_PARKINGLOT = 'selectParkinglot';
+export const POST_LOGIN = 'postLogin';
 
 // const ROOT_URL = 'http://ec2-18-220-74-127.us-east-2.compute.amazonaws.com:3000';
 const ROOT_URL = 'http://localhost:3000';
 
-export function fetchReservations(id, date) {
-    const request = axios.get(`${ROOT_URL}/reservation/timeslots?SUUID=${id}&date=${date}`);
+export function fetchReservations(id, date, config) {
+    const request = axios.get(`${ROOT_URL}/reservation/timeslots?SUUID=${id}&date=${date}`, config);
 
     return {
         type: FETCH_RESERVATIONS,
@@ -20,8 +21,8 @@ export function fetchReservations(id, date) {
     };
 }
 
-export function fetchUser(id) {
-    const request = axios.get(`${ROOT_URL}/user/${id}`);
+export function fetchUser(config) {
+    const request = axios.get(`${ROOT_URL}/user/${config.headers.UUID}`, config);
     
     return {
         type: FETCH_USER,
@@ -31,7 +32,7 @@ export function fetchUser(id) {
 
 export function postUser(values, callback) {
     const request = axios.post(`${ROOT_URL}/user/`, values)
-        .then(() => callback());
+        .then((res) => callback(res));
 
     return {
         type: POST_USER,
@@ -46,8 +47,8 @@ export function selectParkinglot(id) {
     };
 }
 
-export function fetchParkinglots(lat, lng) {
-    const request = axios.get(`${ROOT_URL}/parking?latitude=${lat}&longitude=${lng}`);
+export function fetchParkinglots(lat, lng, config) {
+    const request = axios.get(`${ROOT_URL}/parking?latitude=${lat}&longitude=${lng}`, config);
     
     return {
         type: FETCH_PARKINGLOTS,
@@ -55,8 +56,8 @@ export function fetchParkinglots(lat, lng) {
     };
 }
 
-export function fetchSpots(spots) {
-    const request = axios.post(`${ROOT_URL}/spot`, { spots });
+export function fetchSpots(spots, config) {
+    const request = axios.post(`${ROOT_URL}/spot`, { spots }, config);
 
     return {
         type: FETCH_SPOTS,
@@ -86,4 +87,12 @@ export function fetchLocation() {
         type: FETCH_LOCATION,
         payload: getLocation()
     };
+}
+
+export function postLogin(values) {
+    const request = axios.post(`${ROOT_URL}/auth`, values);
+    return {
+        type: POST_LOGIN,
+        payload: request
+    }
 }

@@ -7,7 +7,8 @@ import { fetchReservations } from '../actions';
 class ParkinglotDetail extends Component {
     clickSpot(id) {
         const date = new Date();
-        this.props.fetchReservations(id, `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`);
+        const { config } = this.props;
+        this.props.fetchReservations(id, `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`, config);
     }
 
     renderSpots() {
@@ -40,8 +41,8 @@ class ParkinglotDetail extends Component {
     }
 }
 
-function mapStateToProps({ reservations, activeParkinglot, spots, parkinglots }) {
-    return { reservations, activeParkinglot, spots, parkinglots };
+function mapStateToProps({ reservations, activeParkinglot, spots, parkinglots, config }) {
+    return { reservations, activeParkinglot, spots, parkinglots, config };
 }
 
 export default connect(mapStateToProps, { fetchReservations })(ParkinglotDetail);

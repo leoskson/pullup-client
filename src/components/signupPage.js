@@ -18,8 +18,9 @@ class SignupPage extends Component {
     }
 
     onSubmit(values) {
-        this.props.postUser(values, () => {
-            this.props.history.push('/');
+        this.props.postUser(values, (res) => {
+            console.log(res);
+            // this.props.history.push('/');
         });
     }
 

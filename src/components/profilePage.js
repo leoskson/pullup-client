@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -6,23 +7,24 @@ import { fetchUser } from '../actions';
 
 class ProfilePage extends Component {
     componentDidMount() {
-        const { id } = this.props.match.params;
-        this.props.fetchUser(id);
+        this.props.fetchUser(this.props.config);
+    }
+
+    renderReservation(reservationList) {
+        const reservations = _.mapKeys(reservationList, 'RUUID');
+        return _.map(reservations, reservation => {
+            return <li key={reservation.RUUID}>{reservation.date}</li>
+        });
     }
 
     renderUser(user) {
-        const { card_number, card_provider, exp_date, name } = user.payment;
         return (
             <ul>
                 <li>{user.first}</li>
                 <li>{user.last}</li>
                 <li>{user.email}</li>
-                <li>{user.car}</li>
-                <li>{user.license_plate}</li>
-                <li>{card_number}</li>
-                <li>{card_provider}</li>
-                <li>{exp_date}</li>
-                <li>{name}</li>
+                <li>{user.carModel}</li>
+                <li>{user.licensePlate}</li>
             </ul>
         );
     }
@@ -36,13 +38,17 @@ class ProfilePage extends Component {
             <div>
                 <Navbar />
                 {this.renderUser(user)}
+                <ul>
+                    Reservations
+                    {this.renderReservation(user.reservation)}
+                </ul>
             </div>
         );
     }
 }
 
-function mapStateToProps({ user }) {
-    return { user };
+function mapStateToProps({ user, config }) {
+    return { user, config };
 }
 
 export default connect(mapStateToProps, { fetchUser })(ProfilePage);

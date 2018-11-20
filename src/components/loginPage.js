@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
+import { postLogin } from '../actions';
+
 class LoginPage extends Component {
 
     renderField(field) {
@@ -15,7 +17,18 @@ class LoginPage extends Component {
     }
 
     onSubmit(values) {
-        console.log(values);
+        this.props.postLogin(values);
+    }
+
+    componentDidUpdate() {
+        const { headers } = this.props.config;
+        if (!headers) return;
+        if (headers.success === false) {
+            alert(headers.message);
+        } else if(headers.success === true) {
+            alert('welcome');
+            this.props.history.push('/');
+        }
     }
 
     render() {
@@ -25,7 +38,7 @@ class LoginPage extends Component {
                 <Field
                     type='email'
                     label='User email'
-                    name='UUID'
+                    name='email'
                     component={this.renderField} />
                 <Field
                     type='password'
@@ -38,9 +51,12 @@ class LoginPage extends Component {
     }
 }
 
+function mapStateToProps({ config }) {
+    return { config };
+}
+
 export default reduxForm({
     form: 'LoginPage'
 })(
-    connect(null,{})(LoginPage)
+    connect(mapStateToProps,{ postLogin })(LoginPage)
 );
-

@@ -16,11 +16,12 @@ class RootPage extends Component {
 
     componentDidUpdate(prevProps) {
         const { latitude, longitude } = this.props.location;
+        const { config } = this.props;
         if (this.props.location !== prevProps.location) {
-            this.props.fetchParkinglots(latitude, longitude);
+            this.props.fetchParkinglots(latitude, longitude, config);
         }
         if (this.props.activeParkinglot !== prevProps.activeParkinglot) {
-            this.props.fetchSpots(this.props.parkinglots[this.props.activeParkinglot].spots);
+            this.props.fetchSpots(this.props.parkinglots[this.props.activeParkinglot].spots, config);
         }
     }
 
@@ -37,8 +38,8 @@ class RootPage extends Component {
     }
 }
 
-function mapStateToProps({ location, parkinglots, activeParkinglot, spots, reservations }) {
-    return { location, parkinglots, activeParkinglot, spots, reservations };
+function mapStateToProps({ location, parkinglots, activeParkinglot, spots, reservations, user, config }) {
+    return { location, parkinglots, activeParkinglot, spots, reservations, user, config };
 }
 
 export default connect(mapStateToProps, { fetchLocation, fetchParkinglots, fetchSpots })(RootPage);

@@ -7,7 +7,7 @@ class Navbar extends Component {
             <nav className="navbar navbar-expand-lg navbar-light bg-light myNav">
             <div className="navbar-nav">
                 <Link className='nav-item nav-link active' to='/about'>About</Link>
-                <Link className='nav-item nav-link active' to='/user/sample'>Profile</Link>
+                <Link className='nav-item nav-link active' to='/user'>Profile</Link>
                 <Link className='nav-item nav-link active' to='/'>Reservation</Link>
             </div>
             </nav>

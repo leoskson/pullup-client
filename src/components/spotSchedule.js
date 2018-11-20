@@ -43,6 +43,16 @@ class SpotSchedule extends Component {
         })
     }
 
+    renderCheck() {
+        return _.map(this.props.reservations, reservation => {
+            return (
+                <div key={reservation.id}>
+                    <input type='checkbox' value={reservation.id}/>
+                </div>
+            );
+        })
+    }
+
     render() {
         if (!this.props.reservations[0]) {
             return <div></div>
@@ -53,6 +63,7 @@ class SpotSchedule extends Component {
                     <tr>
                         <th>Time</th>
                         <th>Reserved</th>
+                        <th>Check</th>
                     </tr>
                     <tr>
                         <td>
@@ -60,6 +71,9 @@ class SpotSchedule extends Component {
                         </td>
                         <td>
                             {this.renderAvail()}
+                        </td>
+                        <td>
+                            {this.renderCheck()}
                         </td>
                     </tr>
                 </tbody>

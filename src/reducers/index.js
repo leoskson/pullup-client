@@ -7,6 +7,7 @@ import locationReducer from './location';
 import activeParkinglotReducer from './activeParkinglot';
 import spotReducer from './spot';
 import reservationReducer from './reservation';
+import configReducer from './config';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   location: locationReducer,
   spots: spotReducer,
   reservations: reservationReducer,
-  form: formReducer
+  form: formReducer,
+  config: configReducer
 });
 
 export default rootReducer;
