@@ -17,7 +17,6 @@ class RootPage extends Component {
             if (!latitude || !longitude) {
                 this.props.fetchLocation();
             }
-            this.props.fetchParkinglots(latitude, longitude, config);
         }
     }
 
@@ -33,9 +32,14 @@ class RootPage extends Component {
     }
 
     render() {
-        const { config } = this.props;
+        const { config, parkinglots, location } = this.props;
         if (!config.headers) {
             return <Redirect to='/login' />
+        }
+        if (Object.keys(parkinglots).length == 0 || !location.longitude) {
+            return (
+                <div>Loading</div>
+            );
         }
         return (
             <div>

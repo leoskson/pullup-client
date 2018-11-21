@@ -104,9 +104,10 @@ export class MapContainer extends Component {
 
     render() {
         const position = {lat: this.props.location.latitude, lng: this.props.location.longitude};
+        console.log('reloading map');
         return (
             <div id='mapBox'>
-                <Map  google={this.props.google} initialCenter={{}} center={position} zoom={14} style={GOOGLE_STYLE}>
+                <Map  google={this.props.google} initialCenter={position} center={position} zoom={14} style={GOOGLE_STYLE}>
                     <Marker position={position}/>
                     {this.markerParking()}
                 </Map>
