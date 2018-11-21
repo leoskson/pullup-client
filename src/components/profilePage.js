@@ -1,13 +1,17 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Navbar from './navbar';
 import { fetchUser } from '../actions';
 
 class ProfilePage extends Component {
     componentDidMount() {
-        this.props.fetchUser(this.props.config);
+        const { config } = this.props;
+        if (config.headers) {
+            this.props.fetchUser(config);
+        }
     }
 
     renderReservation(reservationList) {
@@ -30,7 +34,10 @@ class ProfilePage extends Component {
     }
 
     render() {
-        const { user } = this.props;
+        const { user, config } = this.props;
+        if (!config.headers) {
+            return <Redirect to='/login' />
+        }
         if (!user.first) {
             return <div>Loading ...</div>
         }

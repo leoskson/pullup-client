@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Navbar from './navbar';
 import GoogleApiWrapper from './googleMap';
@@ -12,8 +13,10 @@ class RootPage extends Component {
     componentDidMount() {
         const { latitude, longitude } = this.props.location;
         const { config } = this.props;
-        this.props.fetchLocation();
-        this.props.fetchParkinglots(latitude, longitude, config);
+        if (config.headers) {
+            this.props.fetchLocation();
+            this.props.fetchParkinglots(latitude, longitude, config);
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -28,6 +31,10 @@ class RootPage extends Component {
     }
 
     render() {
+        const { config } = this.props;
+        if (!config.headers) {
+            return <Redirect to='/login' />
+        }
         return (
             <div>
                 <Navbar />
