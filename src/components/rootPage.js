@@ -14,7 +14,9 @@ class RootPage extends Component {
         const { latitude, longitude } = this.props.location;
         const { config } = this.props;
         if (config.headers) {
-            this.props.fetchLocation();
+            if (!latitude || !longitude) {
+                this.props.fetchLocation();
+            }
             this.props.fetchParkinglots(latitude, longitude, config);
         }
     }

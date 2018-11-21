@@ -8,7 +8,7 @@ class ParkinglotDetail extends Component {
     clickSpot(id) {
         const date = new Date();
         const { config } = this.props;
-        this.props.fetchReservations(id, `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`, config);
+        this.props.fetchReservations(id, `${date.getMonth()+1}-${date.getDate()}-${date.getFullYear()}`, config);
     }
 
     renderSpots() {

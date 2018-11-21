@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { postLogin } from '../actions';
 
@@ -46,6 +47,7 @@ class LoginPage extends Component {
                     name='password'
                     component={this.renderField} />
                 <button type='submit' className='btn btn-primary'>Login</button>
+                <Link to='/signup' className='btn btn-danger'>Register</Link>
             </form>
         );
     }

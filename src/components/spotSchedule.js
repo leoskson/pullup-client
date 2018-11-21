@@ -47,7 +47,7 @@ class SpotSchedule extends Component {
         return _.map(this.props.reservations, reservation => {
             return (
                 <div key={reservation.id}>
-                    <input type='checkbox' value={reservation.id}/>
+                    <input type='checkbox' value={reservation.id} />
                 </div>
             );
         })
@@ -73,12 +73,14 @@ class SpotSchedule extends Component {
                             {this.renderAvail()}
                         </td>
                         <td>
-                            {this.renderCheck()}
+                            <form>
+                                {this.renderCheck()}
+                            </form>
                         </td>
                     </tr>
                 </tbody>
             </table>
-        );  
+        );
     }
 }
 
