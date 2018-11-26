@@ -23,41 +23,32 @@ class ProfilePage extends Component {
 
     renderUser(user) {
         return (
-             <table class="table table-user-information">
+            <div className="col-md-6 col-lg-6">
+             <table className="table table-user-information">
                  <tbody>
-                 <tr>
-                        <td>First Name:</td>
-                        <td>{user.first}</td>
+                    <tr>
+                        <td><b>First Name:</b></td>
+                        <td >{user.first}</td>
                       </tr>
                       <tr>
-                        <td>Last Name:</td>
-                        <td>{user.last}</td>
+                        <td ><b>Last Name:</b></td>
+                        <td >{user.last}</td>
                       </tr>
                       <tr>
-                        <td>Email:</td>
-                        <td>{user.email}</td>
+                        <td><b>Email:</b></td>
+                        <td >{user.email}</td>
                       </tr>
                       <tr>
-                        <td>Car:</td>
-                        <td>{user.carModel}</td>
+                        <td><b>Car:</b></td>
+                        <td >{user.carModel}</td>
                       </tr>
                       <tr>
-                        <td>License Plate No:</td>
-                        <td>{user.licensePlate}</td>
-                      </tr>
-                      <tr>
-                        <td>Reservations:</td>
-                        <tabs>
-                        <Pane label="Past">
-                        <div>This is my tab past reservations!</div>
-                        </Pane>
-                        <Pane label="Current">
-                        <div>This is my Current Reservations!</div>
-                        </Pane>
-                        </tabs>
+                        <td><b>License Plate No:</b></td>
+                        <td >{user.licensePlate}</td>
                       </tr>
                  </tbody>
              </table>
+             </div>
         );
     }
 
@@ -73,8 +64,8 @@ class ProfilePage extends Component {
             <div>
                 <Navbar />
                 {this.renderUser(user)}
-                <ul>
-                    Reservations
+                <ul className="reservation">
+                    <b>Reservations:</b>
                     {this.renderReservation(user.reservation)}
                 </ul>
             </div>

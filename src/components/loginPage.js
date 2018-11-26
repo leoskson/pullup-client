@@ -3,7 +3,6 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { postLogin } from '../actions';
-import { logo } from '../Picture.png';
 
 class LoginPage extends Component {
 
@@ -35,19 +34,17 @@ class LoginPage extends Component {
     render() {
         const { handleSubmit } = this.props;
         return (
-            <div>
-            <img src={logo} alt="App logo" />
-            </div>
            
             <form className='myLogin' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                <h2> Welcome to PullUp Parking App Login</h2>
                 <Field
                     type='email'
-                    label='User email'
+                    label='User email:' 
                     name='email'
                     component={this.renderField} />
                 <Field
                     type='password'
-                    label='Password'
+                    label='Password:'
                     name='password'
                     component={this.renderField} />
                 <button type='submit' className='btn btn-primary'>Login</button>

@@ -25,6 +25,7 @@ class SignupPage extends Component {
         const { handleSubmit } = this.props;
         return (
             <form className='mySignup' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <h2>Welcome to PullUp Registration Page</h2>
                 <Field
                     type='email'
                     label='User email'
