@@ -23,13 +23,41 @@ class ProfilePage extends Component {
 
     renderUser(user) {
         return (
-            <ul>
-                <li>{user.first}</li>
-                <li>{user.last}</li>
-                <li>{user.email}</li>
-                <li>{user.carModel}</li>
-                <li>{user.licensePlate}</li>
-            </ul>
+             <table class="table table-user-information">
+                 <tbody>
+                 <tr>
+                        <td>First Name:</td>
+                        <td>{user.first}</td>
+                      </tr>
+                      <tr>
+                        <td>Last Name:</td>
+                        <td>{user.last}</td>
+                      </tr>
+                      <tr>
+                        <td>Email:</td>
+                        <td>{user.email}</td>
+                      </tr>
+                      <tr>
+                        <td>Car:</td>
+                        <td>{user.carModel}</td>
+                      </tr>
+                      <tr>
+                        <td>License Plate No:</td>
+                        <td>{user.licensePlate}</td>
+                      </tr>
+                      <tr>
+                        <td>Reservations:</td>
+                        <tabs>
+                        <Pane label="Past">
+                        <div>This is my tab past reservations!</div>
+                        </Pane>
+                        <Pane label="Current">
+                        <div>This is my Current Reservations!</div>
+                        </Pane>
+                        </tabs>
+                      </tr>
+                 </tbody>
+             </table>
         );
     }
 
