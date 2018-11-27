@@ -22,6 +22,9 @@ class Navbar extends Component {
                 <LinkContainer to='/'>
                     <NavItem eventKey={3}>Reservation</NavItem>
                 </LinkContainer>
+                <LinkContainer to='/login'>
+                    <NavItem eventKey={4}>Log Out</NavItem>
+                </LinkContainer>
             </Nav>
         </NavigationBar>
         );
