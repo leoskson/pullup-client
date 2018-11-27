@@ -66,6 +66,7 @@ class ProfilePage extends Component {
                 {this.renderUser(user)}
                 <ul className="reservation">
                     <b>Reservations:</b>
+                    
                     {this.renderReservation(user.reservation)}
                 </ul>
             </div>
@@ -78,3 +79,4 @@ function mapStateToProps({ user, config }) {
 }
 
 export default connect(mapStateToProps, { fetchUser })(ProfilePage);
+
