@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectParkinglot } from '../actions';
+import { ListGroupItem } from 'react-bootstrap';
 
 class Parkinglot extends Component {
 
@@ -10,7 +11,7 @@ class Parkinglot extends Component {
 
     render() {
         return (
-            <li className='myParking' onClick={this.onChange.bind(this)}>{this.props.parkinglot.name}</li>
+            <ListGroupItem onClick={this.onChange.bind(this)}>{this.props.parkinglot.name}</ListGroupItem>
         );
     }
 }

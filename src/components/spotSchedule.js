@@ -21,7 +21,7 @@ class SpotSchedule extends Component {
     renderTable() {
         return _.map(this.props.reservations, reservation => {
             return (
-                <div key={reservation.id} className='myReservation'>{this.getTime(reservation.id)}</div>
+                <div key={reservation.id} className='myReservation'>{this.getTime(reservation.id) + " - "+ this.getTime(reservation.id + 1)}</div>
             );
         })
     }

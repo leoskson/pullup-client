@@ -1,56 +1,85 @@
+.appContainer {
+    display: flex;
+    flex-direction: column;
+}
+
 #mapBox div:first-child {
     position: relative !important;
     margin-top: 2%;
 }
-/* parking list */
+
+.verticalBar {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.parkingContainer {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+}
+
 .myParkingList {
-    /* background-color:red */
     margin-top: 5%;
 }
-/* parkinglot detail */
+
 .myParkingDetail {
-    /* background-color:red */
+    margin-left: 5%;
     margin-right: 15%;
     width: 30%;
     float: left;
 }
-/* parkinglot */
+
+.scheduleContainer {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+
+}
+
+.wrapper {
+    display:flex;
+    flex-direction: column;
+}
+
 .myParking {
     /* background-color:red */
 }
-/* spotlist */
+
+
 .mySpotList {
     /* background-color:red */
 }
-/* spot */
+
 .mySpot {
     /* background-color:red */
 }
-/* reservationlist */
-#myReservationList {
-    /* background-color:red */
-    max-width: 50%;
-    margin-left: 0%;
-    float: left;
-}
-/* reservation */
+
 .myReservation {
     /* background-color:red */
 }
-/* signup */
+
 .mySignup {
     /* background-color: red */
     margin-top: 5%;
 }
-/* login */
+
 .myLogin {
-    margin-top: 5%;
+    margin: auto;
+    width: 40%;
+    align-items: center;
 }
-/* field */
+
 .myField {
     /* background-color: red; */
 }
-/* navbar */
+
 .myNav {
     margin-top:3%;
+}
+
+
+.myReservationList {
+    width:100px;
 }

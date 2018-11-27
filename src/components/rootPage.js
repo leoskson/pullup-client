@@ -7,8 +7,10 @@ import ParkinglotList from './parkinglotList';
 import ParkinglotDetail from './parkinglotDetail';
 import SpotSchedule from './spotSchedule';
 import { fetchLocation, fetchParkinglots, fetchSpots } from '../actions';
+import { Tabs, Tab } from 'react-bootstrap';
 
 class RootPage extends Component {
+    
     componentDidMount() {
         const { latitude, longitude } = this.props.location;
         this.props.fetchLocation();
@@ -26,17 +28,34 @@ class RootPage extends Component {
     }
 
     render() {
+
         return (
-            <div>
+            <div className='appContainer'>
                 <Navbar />
                 <GoogleApiWrapper />
-                <ParkinglotList />
-                <ParkinglotDetail />
-                <SpotSchedule />
+                <Tabs defaultActiveKey={1} id="uncontrolled-tab-example" >
+                    <Tab eventKey={1} title="Parking Lots">
+                        <ParkinglotList />
+                    </Tab>
+                    <Tab eventKey={2} title="Spots">
+                        <ParkinglotDetail />
+                    </Tab>
+                    <Tab eventKey={3} title="Schedule">
+                        <SpotSchedule />
+                    </Tab>
+                    <Tab eventKey={4} title="Payment">
+                        
+                    </Tab>
+                </Tabs>
             </div>
         );
     }
+
+    changeTabState(state) {
+        this.setState({ heading: state });
+    }
 }
+
 
 function mapStateToProps({ location, parkinglots, activeParkinglot, spots, reservations, user, config }) {
     return { location, parkinglots, activeParkinglot, spots, reservations, user, config };

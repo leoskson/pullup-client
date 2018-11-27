@@ -26,7 +26,7 @@ class ParkinglotDetail extends Component {
     render() {
         const parkinglot = this.props.parkinglots[this.props.activeParkinglot];
         if (!parkinglot) {
-            return <div>Select parkinglot plz</div>
+            return <div></div>;
         }
         return (
             <div className='myParkingDetail'>
