@@ -6,7 +6,7 @@ import { InfoWindow, Marker, GoogleApiWrapper, Map } from 'google-maps-react';
 
 const apiKey = 'AIzaSyDq0qA5f0DGeaZ5HBzWo1t5J2HuV_i4OiQ';
 const GOOGLE_STYLE = {
-    width: '85vw',
+    width: '78vw',
     height: '50vh',
     position: 'relative'
 };
