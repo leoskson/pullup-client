@@ -52,6 +52,14 @@
 
 }
 
+#spotButtonGroup {
+    margin-top: 15px;
+    width: 400px;
+}
+
+#spotButton {
+    width: 75px;
+}
 
 
 /*-------------- Reservation --------------*/

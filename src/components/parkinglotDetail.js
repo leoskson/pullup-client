@@ -1,10 +1,14 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { ButtonGroup, ButtonToolbar, ToggleButtonGroup, ToggleButton, Button} from 'react-bootstrap';
 import { fetchReservations } from '../actions';
 
 class ParkinglotDetail extends Component {
+
+    updateFloorSpots(floor) {
+        this.props.onChangeFloor(floor);
+    }
 
     clickSpot(id) {
         const date = new Date();
@@ -14,16 +18,75 @@ class ParkinglotDetail extends Component {
     }
 
     renderSpots() {
-        return _.map(this.props.spots, spot => {
-            return (
-                <li className='mySpot' key={spot.SUUID} onClick={() => this.clickSpot(spot.SUUID)}>
-                    <div>id: {spot.floor}-1 </div>
-                    <div>reserved: {String(spot.avail)} </div>
-                    <div>floor: {spot.floor} </div>
-                </li>
-            );
-        });
+        const propsSpots = this.props.spots;
+        const floorSpots = [];
+        for (let [key, value] of Object.entries(propsSpots)) {
+            if (value.floor === this.props.floor) {
+                floorSpots.push(value);
+            }
+        }
+        const sliceFloors = [];
+        while (floorSpots.length !== 0) {
+            sliceFloors.push(floorSpots.splice(0, 5));  
+        }
+        return (
+            <ButtonToolbar id="spotButtonGroup">
+                {
+                    sliceFloors.map((floors, j) => {
+                        return (
+                            <ButtonGroup vertical={false} key={j}>
+                                {
+                                    floors.map((spot, i) => {
+                                        return <Button id="spotButton" key= { spot.SUUID } onClick={() => this.clickSpot(spot.SUUID)} bsStyle= {spot.avail ? "danger" : "success"}>{this.props.floor + " - " + (j*5 + i)}</Button>;
+                                    })
+                                }
+                            </ButtonGroup>
+                        );
+                    })
+                }
+            </ButtonToolbar>
+            
+            // <ButtonGroup vertical={false}>
+            // {
+            //     floorSpots.map((spot, i) => {
+            //         if (i < 5) {
+            //             return (
+            //                     
+            //             );
+            //         } else {
+
+            //         }
+            //     })
+            // }
+            // </ButtonGroup>
+        );
     }
+
+    renderFloors() {
+        const spotsByFloor = new Map();
+        const spots = this.props.spots;
+        for (let [key, value] of Object.entries(spots)) {
+            if (!spotsByFloor.has(value.floor)) {
+                spotsByFloor.set(value.floor, [value]);
+            } else {
+                spotsByFloor.get(value.floor).push(value);
+            }
+        }
+        const floors = [...spotsByFloor.keys()].sort();
+        return (
+            <ButtonToolbar>
+                <ToggleButtonGroup value={this.props.floor} onChange={() => console.log("hey")} type="radio" name="floors" >
+                    {
+                        floors.map((key) => {
+                            return <ToggleButton onClick={() => this.updateFloorSpots(key)} value={key} key={key}>{key}</ToggleButton>;
+                        })    
+                    
+                    }
+                </ToggleButtonGroup>
+            </ButtonToolbar>);
+    }
+
+
 
     render() {
         const parkinglot = this.props.parkinglots[this.props.activeParkinglot];
@@ -35,9 +98,8 @@ class ParkinglotDetail extends Component {
                 <div>{parkinglot.name}</div>
                 <div>hourly: {parkinglot.hourly}</div>
                 <div>spot : {parkinglot.spotCount}</div>
-                <ul className='mySpotList'>
-                    {this.renderSpots()}
-                </ul>
+                {this.renderFloors()}
+                {this.renderSpots()}
             </div>
         );
     }

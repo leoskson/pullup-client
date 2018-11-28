@@ -11,16 +11,22 @@ import { Tabs, Tab } from 'react-bootstrap';
 
 class RootPage extends Component {
     state = {
-        defaultActiveKey: 1
+        defaultActiveKey: 1,
+        floor: 1
     }
+
     componentDidMount() {
         const { latitude, longitude } = this.props.location;
         this.props.fetchLocation();
         this.interval = setInterval(() => {
             this.refreshSpots();
             this.setState({ time: Date.now() })
-        }, 2000);
+        }, 3000);
     }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+      }
 
     componentDidUpdate(prevProps) {
         const { latitude, longitude } = this.props.location;
@@ -47,11 +53,11 @@ class RootPage extends Component {
                 <Navbar />
                 <GoogleApiWrapper />
                 <Tabs activeKey={this.state.defaultActiveKey} onSelect={this.changeActiveState} id="uncontrolled-tab-example" >
-                    <Tab eventKey={1} title="Parking Lots">
+                    <Tab eventKey={1} onClick={() => this.changeFloorStatus(1)} title="Parking Lots">
                         <ParkinglotList onChangeState={(key) => this.changeActiveState(key)}/>
                     </Tab>
                     <Tab eventKey={2} title="Spots">
-                        <ParkinglotDetail onChangeState={(key) => this.changeActiveState(key)}/>
+                        <ParkinglotDetail onChangeState={(key) => this.changeActiveState(key)} floor={this.state.floor} onChangeFloor={this.changeFloorStatus}/>
                     </Tab>
                     <Tab eventKey={3} title="Schedule">
                         <SpotSchedule />
@@ -63,7 +69,12 @@ class RootPage extends Component {
             </div>
         );
     }
-
+    changeFloorStatus = (floor) => {
+        // console.log("changing state");
+        this.setState({
+            floor: floor
+        })
+    }
     changeActiveState = (key) => {
         this.setState({
             defaultActiveKey: key
