@@ -7,6 +7,7 @@ class Parkinglot extends Component {
 
     onChange() {
         this.props.selectParkinglot(this.props.parkinglot.PUUID);
+        this.props.onChangeState(2);
     }
 
     render() {

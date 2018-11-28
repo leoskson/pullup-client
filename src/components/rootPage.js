@@ -10,10 +10,16 @@ import { fetchLocation, fetchParkinglots, fetchSpots } from '../actions';
 import { Tabs, Tab } from 'react-bootstrap';
 
 class RootPage extends Component {
-    
+    state = {
+        defaultActiveKey: 1
+    }
     componentDidMount() {
         const { latitude, longitude } = this.props.location;
         this.props.fetchLocation();
+        this.interval = setInterval(() => {
+            this.refreshSpots();
+            this.setState({ time: Date.now() })
+        }, 2000);
     }
 
     componentDidUpdate(prevProps) {
@@ -27,18 +33,25 @@ class RootPage extends Component {
         }
     }
 
+    refreshSpots() {
+        const { config } = this.props;
+        if (this.props.parkinglots[this.props.activeParkinglot]) {
+            this.props.fetchSpots(this.props.parkinglots[this.props.activeParkinglot].spots, config);
+        }
+    }
+
     render() {
 
         return (
             <div className='appContainer'>
                 <Navbar />
                 <GoogleApiWrapper />
-                <Tabs defaultActiveKey={1} id="uncontrolled-tab-example" >
+                <Tabs activeKey={this.state.defaultActiveKey} onSelect={this.changeActiveState} id="uncontrolled-tab-example" >
                     <Tab eventKey={1} title="Parking Lots">
-                        <ParkinglotList />
+                        <ParkinglotList onChangeState={(key) => this.changeActiveState(key)}/>
                     </Tab>
                     <Tab eventKey={2} title="Spots">
-                        <ParkinglotDetail />
+                        <ParkinglotDetail onChangeState={(key) => this.changeActiveState(key)}/>
                     </Tab>
                     <Tab eventKey={3} title="Schedule">
                         <SpotSchedule />
@@ -51,8 +64,10 @@ class RootPage extends Component {
         );
     }
 
-    changeTabState(state) {
-        this.setState({ heading: state });
+    changeActiveState = (key) => {
+        this.setState({
+            defaultActiveKey: key
+        })
     }
 }
 

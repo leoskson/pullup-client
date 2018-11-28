@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 import { fetchReservations } from '../actions';
 
 class ParkinglotDetail extends Component {
+
     clickSpot(id) {
         const date = new Date();
         const { config } = this.props;
         this.props.fetchReservations(id, `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`, config);
+        this.props.onChangeState(3);
     }
 
     renderSpots() {

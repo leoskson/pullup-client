@@ -11,7 +11,7 @@ class ParkinglotList extends Component {
         <div className="verticalBar">
             {
             _.map(this.props.parkinglots, parkinglot => {
-                return <Parkinglot key={parkinglot.PUUID} parkinglot={parkinglot} />
+                return <Parkinglot key={parkinglot.PUUID} parkinglot={parkinglot} onChangeState={this.props.onChangeState}/>
             })
         }
         </div>);
