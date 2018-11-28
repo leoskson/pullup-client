@@ -57,7 +57,7 @@ class RootPage extends Component {
                         <ParkinglotList onChangeState={(key) => this.changeActiveState(key)}/>
                     </Tab>
                     <Tab eventKey={2} title="Spots">
-                        <ParkinglotDetail onChangeState={(key) => this.changeActiveState(key)} floor={this.state.floor} onChangeFloor={this.changeFloorStatus}/>
+                        <ParkinglotDetail onChangeState={(key) => this.changeActiveState(key)} floor={this.state.floor} onChangeFloor={(floor) => this.changeFloorStatus(floor)}/>
                     </Tab>
                     <Tab eventKey={3} title="Schedule">
                         <SpotSchedule />
@@ -70,7 +70,6 @@ class RootPage extends Component {
         );
     }
     changeFloorStatus = (floor) => {
-        // console.log("changing state");
         this.setState({
             floor: floor
         })

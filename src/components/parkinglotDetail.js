@@ -45,20 +45,6 @@ class ParkinglotDetail extends Component {
                     })
                 }
             </ButtonToolbar>
-            
-            // <ButtonGroup vertical={false}>
-            // {
-            //     floorSpots.map((spot, i) => {
-            //         if (i < 5) {
-            //             return (
-            //                     
-            //             );
-            //         } else {
-
-            //         }
-            //     })
-            // }
-            // </ButtonGroup>
         );
     }
 
@@ -75,7 +61,7 @@ class ParkinglotDetail extends Component {
         const floors = [...spotsByFloor.keys()].sort();
         return (
             <ButtonToolbar>
-                <ToggleButtonGroup value={this.props.floor} onChange={() => console.log("hey")} type="radio" name="floors" >
+                <ToggleButtonGroup value={this.props.floor} onChange={(value)=>value} type="radio" name="floors" >
                     {
                         floors.map((key) => {
                             return <ToggleButton onClick={() => this.updateFloorSpots(key)} value={key} key={key}>{key}</ToggleButton>;
