@@ -58,7 +58,7 @@ class SpotSchedule extends Component {
             return <div></div>
         }
         return (
-            <table className='table' id='myReservationList'>
+            <table className='table123'>
                 <tbody>
                     <tr>
                         <th>Time</th>
@@ -80,6 +80,7 @@ class SpotSchedule extends Component {
                     </tr>
                 </tbody>
             </table>
+           
         );
     }
 }
