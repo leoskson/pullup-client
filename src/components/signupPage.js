@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-
 import { postUser } from '../actions';
 
 class SignupPage extends Component {
@@ -18,10 +17,16 @@ class SignupPage extends Component {
     }
 
     onSubmit(values) {
-        this.props.postUser(values, (res) => {
-            console.log(res);
-            // this.props.history.push('/');
-        });
+        this.props.postUser(values);
+    }
+
+    componentDidUpdate() {
+        const { headers } = this.props.config;
+        if (!headers) return;
+        if(headers.success === true) {
+            alert('Success');
+            this.props.history.push('/');
+        }
     }
 
     render() {
@@ -70,8 +75,12 @@ class SignupPage extends Component {
     }
 }
 
+function mapStateToProps({ config }) {
+    return { config };
+}
+
 export default reduxForm({
     form: 'SignupPage'
 })(
-    connect(null,{ postUser })(SignupPage)
+    connect(mapStateToProps,{ postUser })(SignupPage)
 );
