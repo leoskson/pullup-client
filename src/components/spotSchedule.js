@@ -35,16 +35,6 @@ class SpotSchedule extends Component {
         console.log(reservation);
     }
 
-    renderCheck() {
-        return _.map(this.props.reservations, reservation => {
-            return (
-                <div className='form-group' key={reservation.id}>
-                    <input className='form-control' type='checkbox' onClick={() => this.checkboxClick(reservation)} value={reservation.id} />
-                </div>
-            );
-        })
-    }
-
     onSubmit(values) {
         const date = new Date();
         const time = _.map(values, (value, key) => {
