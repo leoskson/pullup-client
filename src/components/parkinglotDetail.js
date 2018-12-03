@@ -19,10 +19,6 @@ class ParkinglotDetail extends Component {
 
     renderSpots() {
         let propsSpots = this.props.spots;
-        // const target = propsSpots['38487e40-cbb2-4376-93b6-8fa21b257352'];
-        // if (target) {
-        //     console.log(target.avail);
-        // } 
         let floorSpots = [];
         for (let [key, value] of Object.entries(propsSpots)) {
             if (value.floor === this.props.floor) {

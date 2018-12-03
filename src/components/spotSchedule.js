@@ -25,6 +25,7 @@ class SpotSchedule extends Component {
             );
         })
     }
+                  
 
     getTime(id) {
         const num = Number(id)*30;
@@ -45,6 +46,7 @@ class SpotSchedule extends Component {
 
     renderCheck() {
         return _.map(this.props.reservations, reservation => {
+            console.log(reservation);
             return (
                 <div key={reservation.id}>
                     <input type='checkbox' value={reservation.id}/>
@@ -56,9 +58,10 @@ class SpotSchedule extends Component {
     render() {
         if (!this.props.reservations[0]) {
             return <div></div>
-        }
+        } 
+
         return (
-            <table className='table' id='myReservationList'>
+            <table className='table' style= {{width: "50%"}} id='myReservationList'>
                 <tbody>
                     <tr>
                         <th>Time</th>

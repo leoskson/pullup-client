@@ -21,7 +21,6 @@ export class MapContainer extends Component {
 
     render() {
         const position = {lat: this.props.location.latitude, lng: this.props.location.longitude};
-        console.log(position);
         return (
             <div id='mapBox'>
                 <Map google={this.props.google} center={position} zoom={14} style={GOOGLE_STYLE}>
