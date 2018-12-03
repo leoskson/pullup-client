@@ -109,12 +109,14 @@ export class MapContainer extends Component {
     markerParking() {
         return _.map(this.props.parkinglots, parkinglot => {
             const pos = { lat: parkinglot.latitude, lng: parkinglot.longitude }
+            console.log(pos);
             return <Marker key={parkinglot.PUUID} position={pos} />
         });
     }
 
     render() {
         const position = {lat: this.props.location.latitude, lng: this.props.location.longitude};
+        console.log(this.props);
         return (
             <div id='mapBox'>
                 <Map  google={this.props.google} initialCenter={position} center={position} zoom={14} style={GOOGLE_STYLE}>
