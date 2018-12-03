@@ -31,10 +31,6 @@ class SpotSchedule extends Component {
         })
     }
 
-    checkboxClick(reservation) {
-        console.log(reservation);
-    }
-
     onSubmit(values) {
         const date = new Date();
         const time = _.map(values, (value, key) => {
