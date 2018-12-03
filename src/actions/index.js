@@ -5,8 +5,10 @@ export const FETCH_PARKINGLOTS = 'fetchParkinglots';
 export const FETCH_LOCATION = 'fetchLocation';
 export const FETCH_SPOTS = 'fetchSpots';
 export const FETCH_RESERVATIONS = 'fetchReservations';
+export const POST_RESERVATIONS = 'postReseravations';
 export const POST_USER = 'postUser';
 export const SELECT_PARKINGLOT = 'selectParkinglot';
+export const SELECT_SPOT = 'selectSpot';
 export const POST_LOGIN = 'postLogin';
 
 // const ROOT_URL = 'http://ec2-18-220-74-127.us-east-2.compute.amazonaws.com:3000';
@@ -17,6 +19,15 @@ export function fetchReservations(id, date, config) {
 
     return {
         type: FETCH_RESERVATIONS,
+        payload: request
+    };
+}
+
+export function postReservations(data, config) {
+    const request = axios.post(`${ROOT_URL}/reservation`, data, config);
+
+    return {
+        type: POST_RESERVATIONS,
         payload: request
     };
 }
@@ -37,6 +48,13 @@ export function postUser(values) {
         type: POST_USER,
         payload: request
     };
+}
+
+export function selectSpot(id) {
+    return {
+        type: SELECT_SPOT,
+        payload: id
+    }
 }
 
 export function selectParkinglot(id) {

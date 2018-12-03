@@ -2,22 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
+import { postReservations } from '../actions';
+
 class SpotSchedule extends Component {
-
-    clickReservation(id) {
-        console.log('clicked ' + id);
-    }
-
-    renderSchedule() {
-        return _.map(this.props.reservations, reservation => {
-            return (
-                <li className='myReservation' key={reservation.id} onClick={() => this.clickReservation(reservation.id)}>
-                    <div>{reservation.id}</div>
-                    <div>{String(reservation.reserved)}</div>
-                </li>
-            );
-        });
-    }
 
     renderTable() {
         return _.map(this.props.reservations, reservation => {
@@ -59,7 +46,17 @@ class SpotSchedule extends Component {
     }
 
     onSubmit(values) {
-        console.log(values);
+        const date = new Date();
+        const time = _.map(values, (value, key) => {
+            return key.split('-')[0];
+        })
+        const data = {
+            time: time[0],
+            date: `${date.getMonth()+1}-${date.getDate()}-${date.getFullYear()}`,
+            SUUID: this.props.activeSpot,
+            UUID :  this.props.config.headers.UUID
+        }
+        this.props.postReservations(data, this.props.config);
     }
 
     renderField(field) {
@@ -83,7 +80,7 @@ class SpotSchedule extends Component {
     }
 
     render() {
-        if (!this.props.reservations[0]) {
+        if (!this.props.activeSpot || !this.props.reservations[0]) {
             return <div></div>
         }
         const { handleSubmit } = this.props;
@@ -115,12 +112,12 @@ class SpotSchedule extends Component {
     }
 }
 
-function mapStateToProps({ reservations }) {
-    return { reservations };
+function mapStateToProps({ reservations, activeSpot, config }) {
+    return { reservations, activeSpot, config };
 }
 
 export default reduxForm({
     form: 'ReservationPage'
 })(
-    connect(mapStateToProps,{})(SpotSchedule)
+    connect(mapStateToProps,{ postReservations })(SpotSchedule)
 );
