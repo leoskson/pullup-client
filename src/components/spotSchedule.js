@@ -56,7 +56,15 @@ class SpotSchedule extends Component {
             SUUID: this.props.activeSpot,
             UUID :  this.props.config.headers.UUID
         }
-        this.props.postReservations(data, this.props.config);
+        this.props.postReservations(data, this.props.config, (res) => {
+            if (res.status === 200) {
+                alert('reservation successfull!');
+                this.props.history.push('/user');
+            } else {
+                alert('reservation failed!');
+                this.props.history.push('/');
+            }
+        });
     }
 
     renderField(field) {

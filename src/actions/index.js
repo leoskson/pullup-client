@@ -23,8 +23,9 @@ export function fetchReservations(id, date, config) {
     };
 }
 
-export function postReservations(data, config) {
-    const request = axios.post(`${ROOT_URL}/reservation`, data, config);
+export function postReservations(data, config, callback) {
+    const request = axios.post(`${ROOT_URL}/reservation`, data, config)
+        .then((res) => callback(res));
 
     return {
         type: POST_RESERVATIONS,

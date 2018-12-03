@@ -9,7 +9,7 @@ const DEFAULT_TOKEN = {
     }
 }
 
-export default function(state = DEFAULT_TOKEN, action) {
+export default function(state = {}, action) {
     switch(action.type) {
     case POST_LOGIN:
         return {
