@@ -8,6 +8,7 @@ import ParkinglotDetail from './parkinglotDetail';
 import SpotSchedule from './spotSchedule';
 import { fetchLocation, fetchParkinglots, fetchSpots } from '../actions';
 import { Tabs, Tab } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom'
 
 class RootPage extends Component {
     state = {

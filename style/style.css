@@ -64,10 +64,15 @@
 
 /*-------------- Reservation --------------*/
 .reservationList {
-    width: 60%;
+    width: 70%;
 }
 .reservationTitle{
     font-weight:bold;
+}
+
+.resList {
+    display: flex;
+    flex-direction: row;
 }
 
 

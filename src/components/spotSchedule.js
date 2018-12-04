@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { postReservations } from '../actions';
+import { postReservations, fetchSpots } from '../actions';
 import { Field, reduxForm } from 'redux-form';
-import {Checkbox, FormGroup} from 'react-bootstrap';
+import {Checkbox, FormGroup, SplitButton, MenuItem} from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 class SpotSchedule extends Component {
+
 
     clickReservation(id) {
         console.log('clicked ' + id);
@@ -28,7 +29,42 @@ class SpotSchedule extends Component {
             );
         })
     }
-                  
+
+    handleChange = (evt, evtKey) => {
+        this.setState({btnTitle: evtKey});  
+    }
+    renderDropdownButton() {
+        const date = new Date();
+        let i = date.getDate();
+        const dateCollection = this.getDate(date, 5);
+        return (
+          <SplitButton
+            title={"Select Date"}
+            key={i}
+            id={`split-button-basic-${i}`}
+            onChange = {this.handleChange}
+          >
+            {
+                dateCollection.map((date, index) => {
+                    return <MenuItem key={date} eventKey={date} >{date}</MenuItem>
+                })
+            }
+            
+          </SplitButton>
+        );
+      }      
+      
+    getDate(today, offset) {
+        let dateCollection = [];
+        for (let i = 1; i <= offset; i++) {
+            let nextDate = new Date(today);
+            nextDate.setDate(today.getDate() + 1);
+            let fullDate = nextDate.getMonth() + 1 + "-" + nextDate.getDate() + "-" + nextDate.getFullYear();
+            dateCollection.push(fullDate);
+            today = nextDate;
+        }
+        return dateCollection;
+    }
 
     getTime(id) {
         const num = Number(id)*30;
@@ -49,17 +85,16 @@ class SpotSchedule extends Component {
 
     renderField(field) {
         return (
-            <Checkbox {...field.input} disabled={field.reserved}>{field.reserved ? "reserved" : "vacant"}</Checkbox>
+            <Checkbox {...field.input} disabled={field.reserved}>{" "}</Checkbox>
         );
     }
 
     renderFields() {
         return (
-            <FormGroup className="table-check-form-group">
+            <FormGroup className="table-check-form-group"
+            >
                 {
                     _.map(this.props.reservations, reservation => {
-                        // console.log(reservation.id, reservation);
-                        // console.log("key", reservation.id + Date.now());
                         
                         return (
                             
@@ -92,9 +127,16 @@ class SpotSchedule extends Component {
             SUUID: this.props.activeSpot,
             UUID :  this.props.config.headers.UUID
         }
-        this.props.postReservations(data, this.props.config);
-        alert("success");
-        this.props.history.push('/user');
+        const {reservations} = this.props;
+        this.props.postReservations(data, this.props.config)
+            .then((obj)=> {
+                alert("Reservation Successful");
+                this.props.reservations[data.time].reserved = true;
+                this.props.history.push('/user');
+            })
+            .catch((err) => {
+                alert("Reservation Fail");
+            })
     }
     
     render() {
@@ -109,7 +151,8 @@ class SpotSchedule extends Component {
                     <tbody>
                         <tr>
                             <th>Time</th>
-                            <th>Reserved</th>
+                            <th>Select</th>
+                            <th>Date</th>
                         </tr>
                         <tr>
                             <td>
@@ -117,6 +160,9 @@ class SpotSchedule extends Component {
                             </td>
                             <td>
                                 {this.renderFields()}
+                            </td>
+                            <td>
+                                {this.renderDropdownButton()}
                             </td>
                         </tr>
                     </tbody>
@@ -127,12 +173,12 @@ class SpotSchedule extends Component {
     }
 }
 
-function mapStateToProps({ reservations, activeSpot, config})  {
-    return { reservations, activeSpot, config };
+function mapStateToProps({ reservations, parkinglots, activeParkinglot, activeSpot, config})  {
+    return { reservations, parkinglots, activeParkinglot, activeSpot, config };
 }
 
 export default withRouter(reduxForm({
     form: 'ReservationPage'
 })(
-    connect(mapStateToProps,{ postReservations })(SpotSchedule))
+    connect(mapStateToProps,{ postReservations, fetchSpots })(SpotSchedule))
 );

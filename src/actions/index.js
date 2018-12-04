@@ -9,6 +9,7 @@ export const POST_USER = 'postUser';
 export const POST_LOGIN = 'postLogin';
 export const SELECT_PARKINGLOT = 'selectParkinglot';
 export const POST_RESERVATIONS = 'postReseravations';
+export const DELETE_RESERVATION = 'deleteReservation';
 export const SELECT_SPOT = 'selectSpot';
 
 // const ROOT_URL = 'http://ec2-18-220-74-127.us-east-2.compute.amazonaws.com:3000';
@@ -108,6 +109,14 @@ export function postUser(values) {
     const request = axios.post(`${ROOT_URL}/auth/registration`, values);
     return {
         type: POST_USER,
+        payload: request
+    }
+}
+
+export function deleteReservation(RUUID, config) {
+    const request = axios.delete(`${ROOT_URL}/reservation/${RUUID}`, config);
+    return {
+        type: DELETE_RESERVATION,
         payload: request
     }
 }

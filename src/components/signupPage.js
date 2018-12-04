@@ -25,7 +25,7 @@ class SignupPage extends Component {
         if (!headers) return;
         if(headers.success === true) {
             alert('Success');
-            this.props.history.push('/');
+            window.location = '/login';
         }
     }
 

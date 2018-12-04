@@ -20,6 +20,14 @@ class LoginPage extends Component {
         this.props.postLogin(values);
     }
 
+    toSignUp() {
+        window.location = '/signup';
+    }
+
+    toLogIn() {
+        window.location = '/login';
+    }
+
     componentDidUpdate() {
         const { headers } = this.props.config;
         if (!headers) return;
@@ -38,7 +46,7 @@ class LoginPage extends Component {
                 <p className='logoImage'>
                     <img src='./images/mini_logo.png' width='200px' heigth='220px'></img>
                 </p>
-                <form className='myLogin' onSubmit={ handleSubmit(this.onSubmit.bind(this)) }>
+                <form className='myLogin' onSubmit={ handleSubmit(this.onSubmit.bind(this))}>
                     <Field
                         type='email'
                         label='User email'
@@ -51,7 +59,7 @@ class LoginPage extends Component {
                         component={this.renderField} />
                     <div className='buttonGroup'>
                         <button type='submit' className='btn btn-primary' style= {{marginRight: 5}}>Login</button>
-                        <button type='submit' className='btn btn-primary'>Sign Up</button>
+                        <button type='submit' onClick={() => this.toSignUp()} className='btn btn-primary'>Sign Up</button>
                     </div>
                 </form>
             </div>
