@@ -17,6 +17,12 @@ class RootPage extends Component {
 
     componentDidMount() {
         const { latitude, longitude } = this.props.location;
+        const { config } = this.props;
+        // if (config.headers) {
+        //     if (!latitude || !longitude) {
+        //         this.props.fetchLocation();
+        //     }
+        // }
         this.props.fetchLocation();
         this.interval = setInterval(() => {
             this.refreshSpots();
@@ -47,7 +53,25 @@ class RootPage extends Component {
     }
 
     render() {
+        const { config, parkinglots, location } = this.props;
+        if (!config.headers) {
+            return <Redirect to='/login' />
+        }
+        if (Object.keys(parkinglots).length == 0 || !location.longitude) {
+            return (
+                <div>Loading</div>
+            );
+        }
+        // return (
+        //     <div>
+        //         <Navbar />
+        //         <GoogleApiWrapper />
+        //         <ParkinglotList />
+        //         <ParkinglotDetail />
+        //         <SpotSchedule />
+        //     </div>
 
+        // );
         return (
             <div className='appContainer'>
                 <Navbar />
