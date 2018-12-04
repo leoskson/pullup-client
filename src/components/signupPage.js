@@ -71,7 +71,7 @@ class SignupPage extends Component {
                 <button type='submit' className='btn btn-primary'>Submit</button>
                 <Link to='/login' className='btn btn-danger'>Cancel</Link>
             </form>
-        );
+        ); 
     }
 }
 

@@ -63,14 +63,12 @@
 
 
 /*-------------- Reservation --------------*/
-.myReservationList {
-    /* width:50px; */
+.reservationList {
+    width: 60%;
 }
-
-.myReservation {
-    /* background-color:red */
+.reservationTitle{
+    font-weight:bold;
 }
-
 
 
 /*-------------- Navigation Bar --------------*/
@@ -104,4 +102,12 @@
 .buttonGroup {
     margin:5px;
     display:inline-block;
+}
+
+.table-check-form-group > .checkbox {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+.myReservation > .table {
+    width: 50%;
 }

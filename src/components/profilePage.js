@@ -14,7 +14,7 @@ class ProfilePage extends Component {
     renderReservation(reservationList) {
         const reservations = _.mapKeys(reservationList, 'RUUID');
         return (
-            <ListGroup>
+            <ListGroup className="reservationList">
                 {
                     _.map(reservations, reservation => {
                         return <ListGroupItem key={reservation.RUUID}>{"SpotID(" + reservation.SUUID + ") - Date(" + reservation.date + ") - Slot(" + reservation.time + ")"}</ListGroupItem>;
@@ -62,6 +62,7 @@ class ProfilePage extends Component {
             <div>
                 <Navbar />
                 {this.renderUser(user)}
+                <div className='reservationTitle'>Reservations</div>
                 {this.renderReservation(user.reservation)}
             </div>
         );
