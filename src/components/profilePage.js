@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Navbar from './navbar';
 import { fetchUser } from '../actions';
+import { Table, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class ProfilePage extends Component {
     componentDidMount() {
@@ -12,20 +13,43 @@ class ProfilePage extends Component {
 
     renderReservation(reservationList) {
         const reservations = _.mapKeys(reservationList, 'RUUID');
-        return _.map(reservations, reservation => {
-            return <li key={reservation.RUUID}>{reservation.date}</li>
-        });
+        return (
+            <ListGroup>
+                {
+                    _.map(reservations, reservation => {
+                        return <ListGroupItem key={reservation.RUUID}>{"SpotID(" + reservation.SUUID + ") - Date(" + reservation.date + ") - Slot(" + reservation.time + ")"}</ListGroupItem>;
+                    })
+                }
+            </ListGroup>
+        )
     }
 
     renderUser(user) {
         return (
-            <ul>
-                <li>{user.first}</li>
-                <li>{user.last}</li>
-                <li>{user.email}</li>
-                <li>{user.carModel}</li>
-                <li>{user.licensePlate}</li>
-            </ul>
+            <Table responsive>
+                <thead>
+                    <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Birthday</th>
+                    <th>Email</th>
+                    <th>Car Model</th>
+                    <th>License Plate</th>
+                    <th>Registered Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{user.first}</td>
+                        <td>{user.last}</td>
+                        <td>{user.birthday}</td>
+                        <td>{user.email}</td>
+                        <td>{user.carModel}</td>
+                        <td>{user.licensePlate}</td>
+                        <td>{user.timestamp}</td>
+                    </tr>
+                </tbody>
+            </Table>
         );
     }
 
@@ -38,10 +62,7 @@ class ProfilePage extends Component {
             <div>
                 <Navbar />
                 {this.renderUser(user)}
-                <ul>
-                    Reservations
-                    {this.renderReservation(user.reservation)}
-                </ul>
+                {this.renderReservation(user.reservation)}
             </div>
         );
     }

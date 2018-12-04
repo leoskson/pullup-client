@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ButtonGroup, ButtonToolbar, ToggleButtonGroup, ToggleButton, Button} from 'react-bootstrap';
-import { fetchReservations } from '../actions';
+import { fetchReservations, selectSpot } from '../actions';
 
 class ParkinglotDetail extends Component {
 
@@ -13,6 +13,7 @@ class ParkinglotDetail extends Component {
     clickSpot(id) {
         const date = new Date();
         const { config } = this.props;
+        this.props.selectSpot(id);
         this.props.fetchReservations(id, `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`, config);
         this.props.onChangeState(3);
     }
@@ -95,4 +96,4 @@ function mapStateToProps({ reservations, activeParkinglot, spots, parkinglots, c
     return { reservations, activeParkinglot, spots, parkinglots, config };
 }
 
-export default connect(mapStateToProps, { fetchReservations })(ParkinglotDetail);
+export default connect(mapStateToProps, { fetchReservations, selectSpot })(ParkinglotDetail);

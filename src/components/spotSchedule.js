@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { postReservations } from '../actions';
+import { Field, reduxForm } from 'redux-form';
 
 class SpotSchedule extends Component {
 
@@ -46,7 +48,6 @@ class SpotSchedule extends Component {
 
     renderCheck() {
         return _.map(this.props.reservations, reservation => {
-            console.log(reservation);
             return (
                 <div key={reservation.id}>
                     <input type='checkbox' value={reservation.id}/>
@@ -55,38 +56,80 @@ class SpotSchedule extends Component {
         })
     }
 
+    renderField(field) {
+        return (
+            <div className='form-group'>
+                <input className='form-control' type='checkbox' {...field.input} />
+            </div>
+        );
+    }
+
+    renderFields() {
+        return _.map(this.props.reservations, reservation => {
+            return (
+                <Field
+                    key={reservation.id}
+                    type='checkbox'
+                    name={`${reservation.id}-${this.getTime(reservation.id)}`}
+                    component={this.renderField} />
+            );
+        })
+    }
+
+    onSubmit(values) {
+        const date = new Date();
+        const time = _.map(values, (value, key) => {
+            return key.split('-')[0];
+        })
+        const data = {
+            time: time[0],
+            date: `${date.getMonth()+1}-${date.getDate()}-${date.getFullYear()}`,
+            SUUID: this.props.activeSpot,
+            UUID :  this.props.config.headers.UUID
+        }
+        this.props.postReservations(data, this.props.config);
+    }
+    
     render() {
-        if (!this.props.reservations[0]) {
+        if (!this.props.activeSpot || !this.props.reservations[0]) {
             return <div></div>
-        } 
+        }
+        const { handleSubmit } = this.props;
 
         return (
-            <table className='table' style= {{width: "50%"}} id='myReservationList'>
-                <tbody>
-                    <tr>
-                        <th>Time</th>
-                        <th>Reserved</th>
-                        <th>Check</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            {this.renderTable()}
-                        </td>
-                        <td>
-                            {this.renderAvail()}
-                        </td>
-                        <td>
-                            {this.renderCheck()}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <form className='myReservation' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                <table className='table'  id='myReservationList'>
+                    <tbody>
+                        <tr>
+                            <th>Time</th>
+                            <th>Reserved</th>
+                            <th>Check</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                {this.renderTable()}
+                            </td>
+                            <td>
+                                {this.renderAvail()}
+                            </td>
+                            <td>
+                                {this.renderFields()}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type='submit' className='btn btn-primary'>Submit</button>
+            </form>
         );  
     }
 }
 
-function mapStateToProps({ reservations }) {
-    return { reservations };
+function mapStateToProps({ reservations, activeSpot, config})  {
+    return { reservations, activeSpot, config };
 }
 
-export default connect(mapStateToProps, {})(SpotSchedule);
+export default reduxForm({
+    form: 'ReservationPage'
+})(
+    connect(mapStateToProps,{ postReservations })(SpotSchedule)
+);

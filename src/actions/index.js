@@ -8,10 +8,26 @@ export const FETCH_RESERVATIONS = 'fetchReservations';
 export const POST_USER = 'postUser';
 export const POST_LOGIN = 'postLogin';
 export const SELECT_PARKINGLOT = 'selectParkinglot';
-
+export const POST_RESERVATIONS = 'postReseravations';
+export const SELECT_SPOT = 'selectSpot';
 
 // const ROOT_URL = 'http://ec2-18-220-74-127.us-east-2.compute.amazonaws.com:3000';
 const ROOT_URL = 'http://localhost:3000';
+
+export function postReservations(data, config) {
+    const request = axios.post(`${ROOT_URL}/reservation`, data, config);
+     return {
+        type: POST_RESERVATIONS,
+        payload: request
+    };
+}
+
+export function selectSpot(id) {
+    return {
+        type: SELECT_SPOT,
+        payload: id
+    }
+}
 
 export function fetchReservations(id, date, config) {
     const request = axios.get(`${ROOT_URL}/reservation/timeslots?SUUID=${id}&date=${date}`, config);

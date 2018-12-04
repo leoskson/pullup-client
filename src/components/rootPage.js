@@ -62,9 +62,6 @@ class RootPage extends Component {
                     <Tab eventKey={3} title="Schedule">
                         <SpotSchedule />
                     </Tab>
-                    <Tab eventKey={4} title="Payment">
-                        
-                    </Tab>
                 </Tabs>
             </div>
         );

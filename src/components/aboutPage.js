@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './navbar';
 
+
 class AboutPage extends Component {
     render() {
         return (
